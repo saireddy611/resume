@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Challa Sai Kumar Reddy — Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg: #060812;
+  --card: #131829;
+  --border: rgba(255,255,255,.07);
+  --text: #e8eaf6;
+  --muted: #8b93b8;
+  --c1: #7c6af7;
+  --c2: #f7476a;
+  --c3: #36d9b8;
+  --c4: #fbbf24;
+  --c5: #60a5fa;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CURSOR */
+#cursor {
+  width: 12px; height: 12px;
+  background: var(--c1); border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+  mix-blend-mode: screen;
+}
+#cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(124,106,247,.5); border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+}
+
+/* ORBS */
+.orb {
+  position: fixed; border-radius: 50%;
+  filter: blur(80px); opacity: .18;
+  pointer-events: none; z-index: 0;
+  animation: orbFloat linear infinite;
+}
+.orb1 { width: 600px; height: 600px; background: var(--c1); top: -200px; left: -200px; animation-duration: 20s; }
+.orb2 { width: 400px; height: 400px; background: var(--c2); top: 40%; right: -150px; animation-duration: 25s; animation-delay: -8s; }
+.orb3 { width: 350px; height: 350px; background: var(--c3); bottom: 10%; left: 10%; animation-duration: 18s; animation-delay: -4s; }
+@keyframes orbFloat {
+  0%,100% { transform: translateY(0) scale(1); }
+  33%      { transform: translateY(-40px) scale(1.05); }
+  66%      { transform: translateY(30px) scale(.95); }
+}
+
+/* PROGRESS BAR */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3));
+  z-index: 1000; width: 0%;
+  box-shadow: 0 0 10px var(--c1);
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 16px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(20px);
+  background: rgba(6,8,18,.6);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display); font-weight: 800; font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--c1), var(--c2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a {
+  font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color .2s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -3px;
+  width: 0; height: 1.5px;
+  background: linear-gradient(90deg, var(--c1), var(--c3));
+  transition: width .3s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px 80px;
+  position: relative; z-index: 1;
+}
+.hero-inner { max-width: 800px; }
+
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,106,247,.12); border: 1px solid rgba(124,106,247,.3);
+  border-radius: 100px; padding: 6px 18px;
+  font-size: .72rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--c1); margin-bottom: 28px;
+  animation: slideDown .8s ease both;
+}
+.hero-pill span { width: 6px; height: 6px; background: var(--c3); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+.hero-name {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  line-height: .95; letter-spacing: -.03em; margin-bottom: 10px;
+  animation: slideDown .8s .1s ease both;
+}
+.hero-name .line1 { display: block; color: var(--text); }
+.hero-name .line2 {
+  display: block;
+  background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 50%, var(--c4) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-size: 200%; animation: gradShift 4s ease infinite;
+}
+@keyframes gradShift { 0%,100%{background-position:0%} 50%{background-position:100%} }
+
+.hero-role { font-size: 1rem; color: var(--muted); margin-bottom: 8px; animation: slideDown .8s .2s ease both; }
+.hero-exp {
+  font-size: .82rem; color: var(--c3); font-weight: 500; margin-bottom: 32px;
+  letter-spacing: .05em; animation: slideDown .8s .25s ease both;
+}
+
+.contact-chips {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  animation: slideDown .8s .3s ease both;
+}
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 100px; padding: 8px 18px;
+  font-size: .8rem; color: var(--muted); text-decoration: none;
+  transition: all .25s; white-space: nowrap;
+}
+.chip:hover {
+  background: rgba(124,106,247,.15); border-color: var(--c1);
+  color: var(--text); transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124,106,247,.2);
+}
+.chip-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted);
+  animation: fadeIn 1s 1.2s ease both;
+}
+.scroll-hint .arrow { animation: bounce 2s infinite; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+@keyframes slideDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn    { from{opacity:0} to{opacity:1} }
+
+/* LAYOUT */
+.wrapper { max-width: 940px; margin: 0 auto; padding: 0 32px 120px; position: relative; z-index: 1; }
+
+/* SECTION HEAD */
+.sec-head { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+.sec-icon { width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; font-size: 1.1rem; flex-shrink: 0; }
+.sec-title { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--text); }
+.sec-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* SUMMARY CARD */
+.summary-card {
+  background: linear-gradient(135deg, rgba(124,106,247,.12), rgba(247,71,106,.08));
+  border: 1px solid rgba(124,106,247,.25);
+  border-radius: 20px; padding: 32px 36px;
+  font-size: .95rem; line-height: 1.85; color: var(--muted);
+  position: relative; overflow: hidden;
+}
+.summary-card::before {
+  content: '"'; position: absolute; top: -10px; left: 20px;
+  font-size: 8rem; font-family: Georgia, serif;
+  color: rgba(124,106,247,.1); line-height: 1; pointer-events: none;
+}
+
+/* EXPERIENCE */
+.exp-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 32px;
+  position: relative; overflow: hidden;
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+  margin-bottom: 20px;
+}
+.exp-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  background: linear-gradient(180deg, var(--c1), var(--c2));
+  border-radius: 3px 0 0 3px;
+}
+.exp-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.4); border-color: rgba(124,106,247,.3); }
+
+.exp-top { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 4px; }
+.exp-company { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text); }
+.exp-badge {
+  font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 100px;
+  background: rgba(54,217,184,.12); border: 1px solid rgba(54,217,184,.3); color: var(--c3);
+}
+.exp-role { font-size: .88rem; color: var(--c1); margin-bottom: 20px; font-weight: 500; }
+
+/* Sub-sections inside experience */
+.exp-sub { margin-bottom: 22px; }
+.exp-sub:last-child { margin-bottom: 0; }
+.exp-sub-title {
+  font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--c4); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+.exp-sub-title::after { content: ''; flex: 1; height: 1px; background: rgba(251,191,36,.15); }
+
+.bullets { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.bullets li {
+  font-size: .81rem; color: var(--muted);
+  padding: 9px 12px 9px 26px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--border);
+  border-radius: 10px; position: relative;
+  transition: background .2s, color .2s;
+}
+.bullets li:hover { background: rgba(124,106,247,.08); color: var(--text); }
+.bullets li::before { content: '▸'; position: absolute; left: 9px; color: var(--c1); font-size: .72rem; top: 10px; }
+
+/* COMPETENCIES */
+.comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.comp-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  font-size: .8rem; color: var(--muted);
+  display: flex; align-items: center; gap: 10px;
+  transition: all .2s;
+}
+.comp-item:hover { background: rgba(124,106,247,.1); border-color: rgba(124,106,247,.3); color: var(--text); transform: translateY(-2px); }
+.comp-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* EDUCATION */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.edu-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px;
+  transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden;
+}
+.edu-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+.edu-card.c1::after { background: linear-gradient(90deg,var(--c1),var(--c5)); }
+.edu-card.c2::after { background: linear-gradient(90deg,var(--c3),var(--c4)); }
+.edu-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.4); }
+.edu-year { font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--c4); margin-bottom: 10px; }
+.edu-degree { font-family: var(--font-display); font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+.edu-school { font-size: .8rem; color: var(--muted); margin-bottom: 10px; }
+.edu-score {
+  display: inline-block; font-size: .78rem; font-weight: 600;
+  padding: 3px 12px; border-radius: 100px;
+  background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.25); color: var(--c4);
+}
+
+/* SKILLS */
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.skill-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 24px;
+  transition: transform .3s, border-color .3s;
+}
+.skill-card:hover { transform: translateY(-3px); }
+.skill-card:nth-child(1):hover { border-color: rgba(124,106,247,.4); }
+.skill-card:nth-child(2):hover { border-color: rgba(247,71,106,.4); }
+.skill-card:nth-child(3):hover { border-color: rgba(54,217,184,.4); }
+.skill-card:nth-child(4):hover { border-color: rgba(251,191,36,.4); }
+.skill-card:nth-child(5):hover { border-color: rgba(96,165,250,.4); }
+.skill-card-title {
+  font-size: .7rem; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.skill-card:nth-child(1) .skill-card-title { color: var(--c1); }
+.skill-card:nth-child(2) .skill-card-title { color: var(--c2); }
+.skill-card:nth-child(3) .skill-card-title { color: var(--c3); }
+.skill-card:nth-child(4) .skill-card-title { color: var(--c4); }
+.skill-card:nth-child(5) .skill-card-title { color: var(--c5); }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-size: .74rem; padding: 5px 12px; border-radius: 8px;
+  background: rgba(255,255,255,.04); border: 1px solid var(--border);
+  color: var(--muted); transition: all .2s;
+}
+.skill-card:nth-child(1) .tag:hover { background:rgba(124,106,247,.15); border-color:rgba(124,106,247,.4); color:var(--c1); }
+.skill-card:nth-child(2) .tag:hover { background:rgba(247,71,106,.15); border-color:rgba(247,71,106,.4); color:var(--c2); }
+.skill-card:nth-child(3) .tag:hover { background:rgba(54,217,184,.15); border-color:rgba(54,217,184,.4); color:var(--c3); }
+.skill-card:nth-child(4) .tag:hover { background:rgba(251,191,36,.15); border-color:rgba(251,191,36,.4); color:var(--c4); }
+.skill-card:nth-child(5) .tag:hover { background:rgba(96,165,250,.15); border-color:rgba(96,165,250,.4); color:var(--c5); }
+
+/* CERTS */
+.cert-list { display: grid; gap: 14px; }
+.cert-card {
+  display: flex; gap: 18px; align-items: flex-start;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 22px;
+  transition: transform .3s, border-color .3s;
+}
+.cert-card:hover { transform: translateX(6px); border-color: rgba(96,165,250,.3); }
+.cert-num {
+  width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px;
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: .9rem;
+}
+.cert-num.n1 { background: rgba(124,106,247,.15); color: var(--c1); }
+.cert-num.n2 { background: rgba(54,217,184,.15); color: var(--c3); }
+.cert-num.n3 { background: rgba(247,71,106,.15); color: var(--c2); }
+.cert-name { font-weight: 500; font-size: .92rem; color: var(--text); margin-bottom: 3px; }
+.cert-body { font-size: .78rem; color: var(--muted); }
+
+/* ACHIEVEMENTS */
+.award-list { display: grid; gap: 14px; }
+.award-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 22px;
+  transition: transform .3s, box-shadow .3s;
+}
+.award-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+.award-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; filter: drop-shadow(0 0 6px rgba(251,191,36,.4)); }
+.award-title { font-weight: 600; font-size: .92rem; color: var(--text); margin-bottom: 3px; }
+.award-body { font-size: .8rem; color: var(--muted); }
+
+.section { margin-bottom: 80px; }
+
+footer {
+  text-align: center; padding: 40px 24px;
+  border-top: 1px solid var(--border);
+  font-size: .78rem; color: var(--muted);
+  position: relative; z-index: 1;
+}
+
+@media (max-width: 700px) {
+  nav { padding: 14px 20px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: .65rem; }
+  .wrapper { padding: 0 20px 80px; }
+  .bullets { grid-template-columns: 1fr; }
+  .edu-grid, .skills-grid, .comp-grid { grid-template-columns: 1fr; }
+  body { cursor: auto; }
+  #cursor, #cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">CSKR.</div>
+  <ul class="nav-links">
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#competencies">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certs">Certs</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-pill"><span></span> 2+ Years Experience &nbsp;·&nbsp; Open to Opportunities</div>
+    <h1 class="hero-name">
+      <span class="line1"></span>
+      <span class="line2">Challa Sai Kumar Reddy</span>
+    </h1>
+    <p class="hero-role">Accountant &nbsp;·&nbsp; Finance &amp; Accounting Professional</p>
+    <p class="hero-exp">Full-Cycle Accounting &nbsp;·&nbsp; GST Compliance &nbsp;·&nbsp; Tally Prime ERP &nbsp;·&nbsp; MBA &amp; B.Com</p>
+    <div class="contact-chips">
+      <a href="tel:9052810773" class="chip">
+        <span class="chip-dot" style="background:var(--c3)"></span>+91 9052810773
+      </a>
+      <a href="mailto:saikumarchalla61@gmail.com" class="chip">
+        <span class="chip-dot" style="background:var(--c2)"></span>saikumarchalla61@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/saireddyc" target="_blank" class="chip">
+        <span class="chip-dot" style="background:var(--c5)"></span>linkedin.com/in/saireddyc
+      </a>
+      <span class="chip">
+        <span class="chip-dot" style="background:var(--c4)"></span>Warangal, Telangana
+      </span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><span class="arrow">&#8595;</span></div>
+</section>
+
+<div class="wrapper">
+
+  <!-- PROFESSIONAL SUMMARY -->
+  <div id="summary" class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(124,106,247,.15)">&#128203;</div>
+      <h2 class="sec-title">Professional Summary</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="summary-card">
+      Results-driven Accountant with 2+ years of comprehensive experience in full-cycle accounting operations, financial reporting, and regulatory compliance. Expertise in accounts payable, accounts receivable, general ledger management, bank reconciliation, and GST compliance. Proficient in Tally Prime ERP with strong analytical skills and attention to detail. MBA and B.Com qualified professional with proven ability to streamline accounting processes, ensure accurate financial records, and support strategic business decisions through timely MIS reporting.
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div id="experience" class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(247,71,106,.15)">&#128188;</div>
+      <h2 class="sec-title">Professional Experience</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div class="exp-company">Maritsa Infrastructure Pvt. Limited</div>
+        <div class="exp-badge">April 2023 — Present</div>
+      </div>
+      <div class="exp-role">Accountant</div>
+
+      <div class="exp-sub">
+        <div class="exp-sub-title">&#129534; Accounts Payable Operations</div>
+        <ul class="bullets">
+          <li>Process &amp; verify vendor invoices with 100% accuracy per GST regulations</li>
+          <li>Execute 2-way &amp; 3-way invoice matching with PO and GRN</li>
+          <li>Manage vendor master data &amp; resolve invoice discrepancies</li>
+          <li>Schedule timely vendor payments optimizing cash flow</li>
+          <li>Conduct vendor account reconciliation &amp; aging analysis</li>
+        </ul>
+      </div>
+
+      <div class="exp-sub">
+        <div class="exp-sub-title">&#128200; Accounts Receivable Operations</div>
+        <ul class="bullets">
+          <li>Generate customer invoices &amp; credit notes with accurate tax calculations</li>
+          <li>Monitor AR aging &amp; follow up on overdue payments</li>
+          <li>Process customer payments &amp; maintain receipt records</li>
+          <li>Perform customer account reconciliation &amp; resolve billing disputes</li>
+        </ul>
+      </div>
+
+      <div class="exp-sub">
+        <div class="exp-sub-title">&#128196; General Ledger &amp; Financial Reporting</div>
+        <ul class="bullets">
+          <li>Post journal entries: accruals, prepayments &amp; adjustments</li>
+          <li>Maintain chart of accounts &amp; classify expenses and revenues</li>
+          <li>Prepare &amp; analyze financial statements, balance sheets, P&amp;L</li>
+          <li>Conduct monthly bank reconciliations &amp; resolve discrepancies</li>
+          <li>Support month-end &amp; year-end closing with accuracy</li>
+        </ul>
+      </div>
+
+      <div class="exp-sub">
+        <div class="exp-sub-title">&#128220; Tax Compliance &amp; Statutory Reporting</div>
+        <ul class="bullets">
+          <li>Manage GST compliance: GSTR-1, GSTR-3B filing &amp; reconciliation</li>
+          <li>Handle E-Invoicing including IRN generation &amp; GST portal compliance</li>
+          <li>Generate, verify &amp; reconcile E-Way Bills per statutory requirements</li>
+          <li>Ensure TDS compliance &amp; timely submission of TDS returns</li>
+        </ul>
+      </div>
+
+      <div class="exp-sub">
+        <div class="exp-sub-title">&#9881;&#65039; Systems &amp; Process Improvement</div>
+        <ul class="bullets">
+          <li>Tally Prime ERP for comprehensive financial data management</li>
+          <li>Maintain audit trails &amp; documentation for all financial transactions</li>
+          <li>Prepare MIS reports for senior management decision-making</li>
+          <li>Implement process improvements enhancing efficiency &amp; accuracy</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CORE COMPETENCIES -->
+  <div id="competencies" class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(54,217,184,.15)">&#127919;</div>
+      <h2 class="sec-title">Core Competencies</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c1)"></span>Full-Cycle Accounting &amp; Bookkeeping</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c2)"></span>Accounts Payable &amp; Receivable Management</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c3)"></span>General Ledger &amp; Journal Entries</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c4)"></span>Bank Reconciliation &amp; Cash Flow Management</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c5)"></span>Financial Statements Preparation &amp; Analysis</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c1)"></span>GST Compliance &amp; E-Invoicing</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c2)"></span>TDS &amp; Statutory Compliance</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c3)"></span>Month-End &amp; Year-End Closing</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c4)"></span>MIS Reporting &amp; Financial Analysis</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c5)"></span>Vendor &amp; Customer Relationship Management</div>
+      <div class="comp-item"><span class="comp-dot" style="background:var(--c1)"></span>Internal Controls &amp; Audit Support</div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div id="skills" class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(251,191,36,.15)">&#9889;</div>
+      <h2 class="sec-title">Technical Skills</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">&#129534; Accounting Software</div>
+        <div class="tags">
+          <span class="tag">Tally ERP 9</span>
+          <span class="tag">Tally Prime (Expert)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">&#128202; Microsoft Office</div>
+        <div class="tags">
+          <span class="tag">Advanced Excel</span>
+          <span class="tag">VLOOKUP</span>
+          <span class="tag">Pivot Tables</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Pandas &amp; NumPy</span>
+          <span class="tag">Word</span>
+          <span class="tag">PowerPoint</span>
+          <span class="tag">Access</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">&#128456; GST &amp; Compliance</div>
+        <div class="tags">
+          <span class="tag">E-Invoicing</span>
+          <span class="tag">E-Way Bill</span>
+          <span class="tag">GSTR Filing</span>
+          <span class="tag">GST Portal</span>
+          <span class="tag">TDS Returns</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">&#128640; Database &amp; Programming</div>
+        <div class="tags">
+          <span class="tag">Oracle</span>
+          <span class="tag">MS Access</span>
+          <span class="tag">Python</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div id="education" class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(96,165,250,.15)">&#127891;</div>
+      <h2 class="sec-title">Education</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card c1">
+        <div class="edu-year">2022</div>
+        <div class="edu-degree">Master of Business Administration (Finance)</div>
+        <div class="edu-school">University of Arts and Science</div>
+        <div class="edu-score">CGPA: 67.80%</div>
+      </div>
+      <div class="edu-card c2">
+        <div class="edu-year">2020</div>
+        <div class="edu-degree">B.Com — Computer Applications</div>
+        <div class="edu-school">Kakatiya Government Degree &amp; PG College</div>
+        <div class="edu-score">69.9%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div id="certs" class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(96,165,250,.15)">&#128220;</div>
+      <h2 class="sec-title">Certifications &amp; Training</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="cert-list">
+      <div class="cert-card">
+        <div class="cert-num n1">01</div>
+        <div>
+          <div class="cert-name">Certificate Programme — Banking, Finance &amp; Insurance</div>
+          <div class="cert-body">Kakatiya Government College &times; Bajaj Finserv Limited &middot; 2020</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-num n2">02</div>
+        <div>
+          <div class="cert-name">TCS iON Career Edge — Accounting Skills Module</div>
+          <div class="cert-body">Tata Consultancy Services Digital Learning Hub</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-num n3">03</div>
+        <div>
+          <div class="cert-name">PCAP — Programming Essentials in Python</div>
+          <div class="cert-body">Cisco Network Academy &times; TASK (Telangana Academy for Skill and Knowledge)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="section reveal">
+    <div class="sec-head">
+      <div class="sec-icon" style="background:rgba(251,191,36,.15)">&#127942;</div>
+      <h2 class="sec-title">Achievements</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="award-list">
+      <div class="award-card">
+        <div class="award-icon">&#129353;</div>
+        <div>
+          <div class="award-title">3rd Place — State Level JIGNASA Program</div>
+          <div class="award-body">Telangana State Government (2020) &middot; Criminal Face Identification System project.</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">&#129351;</div>
+        <div>
+          <div class="award-title">1st Place — Quiz Competition</div>
+          <div class="award-body">Narayana College of Commerce.</div>
+        </div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">&#128200;</div>
+        <div>
+          <div class="award-title">Process Improvement Impact</div>
+          <div class="award-body">Successfully streamlined accounting processes resulting in improved accuracy and efficiency across financial operations.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Challa Sai Kumar Reddy &nbsp;&middot;&nbsp; Accountant &nbsp;&middot;&nbsp; Warangal, Telangana</p>
+  <p style="margin-top:6px; opacity:.6">Created by Sai Reddy &#10084;&#65039; Open to new opportunities</p>
+</footer>
+
+<script>
+// CURSOR
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+(function animRing(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+document.querySelectorAll('a,button,.chip,.tag,.cert-card,.award-card,.exp-card,.edu-card,.skill-card,.comp-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cur.style.background='var(--c3)'; cur.style.width='18px'; cur.style.height='18px'; });
+  el.addEventListener('mouseleave',()=>{ cur.style.background='var(--c1)'; cur.style.width='12px'; cur.style.height='12px'; });
+});
+
+// SCROLL PROGRESS
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{ bar.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%'; },{passive:true});
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); },{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// STAGGERED CHILDREN
+const cobs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.edu-card,.skill-card,.cert-card,.award-card,.bullets li,.comp-item').forEach((c,i)=>{
+        c.style.opacity='0'; c.style.transform='translateY(18px)';
+        c.style.transition=`opacity .5s ${i*.07}s ease, transform .5s ${i*.07}s ease`;
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{ c.style.opacity='1'; c.style.transform='translateY(0)'; }));
+      });
+    }
+  });
+},{threshold:0.08});
+document.querySelectorAll('.section').forEach(s=>cobs.observe(s));
+
+// ACTIVE NAV
+const secs = document.querySelectorAll('[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-130) cur=s.id; });
+  navAs.forEach(a=>{ a.style.color=a.getAttribute('href')==='#'+cur?'var(--text)':''; });
+},{passive:true});
+</script>
+</body>
+</html>
